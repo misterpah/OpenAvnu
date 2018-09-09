@@ -297,9 +297,9 @@ int main(int argc, char *argv[])
 	struct mrp_domain_attr *class_b = malloc(sizeof(struct mrp_domain_attr));
 	ctx_sig = ctx;
 	signal(SIGINT, sigint_handler);
-
+	ctx->MRPD_PORT = MRPD_PORT_DEFAULT;
 	int c, rc;
-	while((c = getopt(argc, argv, "anhi:f:")) > 0)
+	while((c = getopt(argc, argv, "anhi:f:P:")) > 0)
 	{
 		switch (c)
 		{
@@ -321,6 +321,9 @@ int main(int argc, char *argv[])
 			glob_use_aaf = 1;
 			sf_pcm_format = SF_FORMAT_PCM_16;
 			callback = pcap_aaf_callback;
+		case 'P':
+			ctx->MRPD_PORT = (int) strtoul(optarg,NULL,10);
+			break;
 		break;
 		default:
     	fprintf(stderr, "Unrecognized option!\n");

@@ -70,7 +70,7 @@ int send_msg(char *data, int data_len, struct mrp_listener_ctx *ctx)
 
 	memset(&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
-	addr.sin_port = htons(MRPD_PORT_DEFAULT);
+	addr.sin_port = htons(ctx->MRPD_PORT);
 	addr.sin_addr.s_addr = inet_addr("127.0.0.1");
 	inet_aton("127.0.0.1", &addr.sin_addr);
 	return sendto(ctx->control_socket, data, data_len, 0,

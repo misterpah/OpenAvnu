@@ -79,7 +79,7 @@ int send_mrp_msg(char *notify_data, int notify_len, struct mrp_talker_ctx *ctx)
 
 	memset(&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
-	addr.sin_port = htons(MRPD_PORT_DEFAULT);
+	addr.sin_port = htons(ctx->MRPD_PORT);
 	inet_aton("127.0.0.1", &addr.sin_addr);
 	addr_len = sizeof(addr);
 	return sendto(ctx->control_socket, notify_data, notify_len, 0,
@@ -357,7 +357,7 @@ int mrp_connect(struct mrp_talker_ctx *ctx)
 		goto out;
 	memset(&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
-	addr.sin_port = htons(MRPD_PORT_DEFAULT);
+	addr.sin_port = htons(ctx->MRPD_PORT);
 	inet_aton("127.0.0.1", &addr.sin_addr);
 	memset(&addr, 0, sizeof(addr));
 	ctx->control_socket = sock_fd;

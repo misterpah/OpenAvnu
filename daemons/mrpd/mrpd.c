@@ -800,6 +800,7 @@ void usage(void)
 		"    -v  enable MVRP Registrar and Participant\n"
 		"    -s  enable MSRP Registrar and Participant\n"
 		"    -i  specify interface to monitor\n"
+		"    -P  specify custom port (Default : 7500)\n"
 		"\n" "%s" "\n", version_str);
 	exit(1);
 }
@@ -829,7 +830,7 @@ int main(int argc, char *argv[])
 	gc_timer = -1;
 
 	for (;;) {
-		c = getopt(argc, argv, "hdlmvspi:");
+		c = getopt(argc, argv, "hdlmvspi:P:");
 
 		if (c < 0)
 			break;
@@ -860,6 +861,9 @@ int main(int argc, char *argv[])
 				usage();
 			}
 			interface = strdup(optarg);
+			break;
+		case 'P':
+			mrpd_port = (int) strtoul(optarg,NULL,10);
 			break;
 		case 'h':
 		default:
